@@ -24,12 +24,15 @@ class LobbyModel:
     def start_game(self, lobby_id: int):
         lobby = self.find_lobby_by_id(lobby_id)
         if lobby is not None:
-            return lobby.game_match
+            lobby.start_game()
+            return lobby
 
     def add_player_to_lobby(self, player: Player, lobby_id):
         lobby = self.find_lobby_by_id(lobby_id)
         if lobby is not None:
-            lobby.add_player(player)
-            return True
+            if lobby.add_player(player):
+                return lobby.to_dict()
+            else:
+                return False
         else:
             return False

@@ -70,10 +70,16 @@ def update_matrix(value):
     return jsonify(game_match_dict)
 
 
-@app.get("/start-game/<lobby_id>")
-def start_game(lobby_id):
-    l_controller.start_game(lobby_id)
-    return json.dumps()
+@app.post("/start-game/")
+def start_game():
+    lobby_id = request.json['id_lobby']
+    return json.dumps(l_controller.start_game(lobby_id))
+
+
+@app.post("/join-lobby/")
+def join_lobby():
+    data = request.json
+    return jsonify(l_controller.add_player_to_lobby(data['email'], data['id_lobby']))
 
 
 if __name__ == '__main__':

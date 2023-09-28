@@ -16,7 +16,7 @@ class LobbyController:
         return self.model.add_player_to_lobby(self.player_controller.get_player_from_email(email), lobby_id)
 
     def start_game(self, lobby_id):
-        return self.game_match_controller.create_match(
+        return self.game_match_controller.create_match_from_lobby(
             self.model.start_game(lobby_id)
         )
 

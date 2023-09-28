@@ -1,5 +1,5 @@
 from game_match import GameMatch
-from player import Player
+from lobby import Lobby
 
 
 class GameMatchModel:
@@ -8,7 +8,12 @@ class GameMatchModel:
         self.games_matches: list[GameMatch] = []
         self.count = 1
 
-    def create_match(self, game_match: GameMatch):
+    def create_match_from_lobby(self, lobby: Lobby):
+        game_match = GameMatch(
+                self.count,
+                lobby.players[0],
+                lobby.players[1],
+            )
         self.games_matches.append(game_match)
         self.count += 1
         return game_match.to_dict()
